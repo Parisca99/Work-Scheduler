@@ -1,4 +1,4 @@
-// my javascript for bobo
+// my javascript starts here
 
 var day_array = [];
 
