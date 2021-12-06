@@ -1,3 +1,3 @@
 # Work-Scheduler
-github repository: https://github.com/Parisca99/Work-Scheduler 
+github repository:
 url of published website:
