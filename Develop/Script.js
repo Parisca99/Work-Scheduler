@@ -1,32 +1,35 @@
 // my javascript starts here
 
 var day_array = [];
-
+//when the page starts loading, do something
+//define day_array
 function pageInit()
 {
     console.log("running pageInit");
+
+    day_array = [ 
+        //["hour","note","edit"],
+        ["9am" ,"",""],
+        ["10am" ,"",""],
+        ["11am" ,"",""],
+        ["12pm" ,"",""],
+        ["1pm" ,"",""],
+        ["2pm","",""],
+        ["3pm" ,"",""],
+        ["4pm" ,"",""],
+        ["5pm" ,"",""],
+        ["6pm" ,"",""]
+     ]
+
+    loadData();
 }
 
 
+//page is finish loading, do something
+//create table and update
 function pageReady()
 {
     console.log("running pageReady");
-
-    day_array = [ 
-                     //["hour","note","edit"],
-                     ["9am" ,"",""],
-                     ["10am" ,"",""],
-                     ["11am" ,"",""],
-                     ["12pm" ,"",""],
-                     ["1pm" ,"",""],
-                     ["2pm","",""],
-                     ["3pm" ,"",""],
-                     ["4pm" ,"",""],
-                     ["5pm" ,"",""],
-                     ["6pm" ,"",""]
-                  ]
-
-    loadData();
 
     var TableGenerator = document.querySelector("#TableGenerator");
     var day_table = makeTable($(TableGenerator),day_array);
@@ -34,6 +37,8 @@ function pageReady()
                     updateTable();
 }
 
+
+//creates the table, hour by hour
 function makeTable(container, data) {
     var table = $("<table/>").addClass('CSSTableGenerator');
     $.each(data, function(rowIndex, r) {
@@ -71,6 +76,7 @@ function makeTable(container, data) {
 }
 
 
+//updates the css for each row of the table based on current time
 function updateTable()
 {
     var date = new Date();
@@ -103,6 +109,7 @@ function updateTable()
 
 }
 
+//enables the save button to call save entry
 function makeTableEventListerners (data)
 {
     $.each(data, function(rowIndex, r) {
@@ -120,7 +127,7 @@ function makeTableEventListerners (data)
 
 
 
-
+//click save button on row, gets called
 function saveEntry(rowIndex, rowid)
 {
     
@@ -135,13 +142,13 @@ function saveEntry(rowIndex, rowid)
     loadData();
 }
 
-
+//save to local storage
 function saveData ()
 {
    console.log("running saveData");
    localStorage.setItem("__day_array", JSON.stringify(day_array));
 }
-
+//load from local storage only if it exists in local storage
 function loadData ()
 {
    var json_data = localStorage.getItem("__day_array");
@@ -152,7 +159,7 @@ function loadData ()
    }
 }
 
-
+//clock at top of page
 function clock() {
     var date = new Date();
     var clockElement = document.getElementById('clock');
@@ -168,7 +175,7 @@ function clock() {
 }
 
 
-
+//page initialization and update colors dependent of time
 window.onload = pageInit;
 jQuery(document).ready(pageReady);
 setInterval(clock, 1000);
